@@ -1,5 +1,5 @@
-#ifndef SRC_SRC_CPP_DELAYX_H_
-#define SRC_SRC_CPP_DELAYX_H_
+#ifndef DELAYX_H_
+#define DELAYX_H_
 
 #include <inttypes.h>
 
@@ -11,11 +11,17 @@
         uint32_t m_uTickPrev;
         uint32_t m_uTickNext;
     public:
-        CDelayX(uint32_t uDuration)
+        CDelayX(uint32_t uDuration, bool bSet = false)
         :m_uDuration(uDuration)
         {
             m_uTickPrev = HAL_GetTick();
             m_uTickNext = m_uTickPrev + m_uDuration;
+
+            if(bSet)
+            {
+                m_uTickPrev -= m_uDuration;
+                m_uTickNext -= m_uDuration;
+            }
         }
 
         bool Huh()
@@ -57,4 +63,4 @@
     }
 #endif
 
-#endif /* SRC_SRC_CPP_DELAYX_H_ */
+#endif /* DELAYX_H_ */
